@@ -1,33 +1,22 @@
 package base;
 
-import com.microsoft.playwright.*;
-import org.testng.annotations.*;
+import com.microsoft.playwright.Page;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
-    protected Playwright playwright;
-    protected Browser browser;
-    protected BrowserContext context;
-    public Page page;
 
-    @BeforeMethod
+    protected Page page;
+    private PlaywrightFactory factory;
+
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions().setHeadless(false));
-        context = browser.newContext();
-        page = context.newPage();
+        factory = new PlaywrightFactory();
+        page = factory.initBrowser();
     }
 
-    @AfterMethod
-    public void teardown() {
-        if (context != null) {
-            context.close();
-        }
-        if (browser != null) {
-            browser.close();
-        }
-        if (playwright != null) {
-            playwright.close();
-        }
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        factory.close();
     }
 }

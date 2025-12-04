@@ -2,6 +2,8 @@ package pages;
 
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class HomePage {
     private final Page page;
@@ -9,6 +11,7 @@ public class HomePage {
     public HomePage(Page page) {
         this.page = page;
     }
+    private static final Logger log = LogManager.getLogger(HomePage.class);
 
     public void navigate() {
         page.navigate("https://financesone.worldbank.org/");
