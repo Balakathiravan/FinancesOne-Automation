@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="FinancesOneSuite">
+    <listeners>
+        <listener class-name="reporting.ExtentTestNGListener"/>
+    </listeners>
+
+    <!-- Run UI tests first -->
+    <test name="All Tests" preserve-order="true">
+        <classes>
+            <!-- UI -->
+            <class name="tests.HomePageTest"/>
+
+            <!-- API -->
+            <class name="tests.api.CountryApiTest"/>
+       </classes>
+    </test>
+
+
+</suite>
+
+
